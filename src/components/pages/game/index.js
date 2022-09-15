@@ -1,12 +1,17 @@
 import axios from 'axios'
 import React, {useState , useEffect} from 'react';
-import { Q, Ans, GiveHint, Hint} from './GameElements';
+import { Q, Ans, GiveHint, Hint, Confirm, DisAns, NavLinks, Hih3} from './GameElements';
+
 
 function Game() {
   const [ data , setData ] = useState({}) 
   const [ hint , setHint ] = useState("") 
-  const [ counter , setCounter ] = useState(0) 
-  const [ answer , setAnswer ] = useState("") 
+  const [ counter , setCounter ] = useState(0)
+  const [ score , setScore ] = useState(0)
+  const [ answer , setAnswer ] = useState("")
+  const [ isAnswerPressed , setIsAnswerPressed ] = useState(false)
+  const [ isAnswerCorrect , setIsAnswerCorrect ] = useState(false)
+  const [ checkAnsher , setCheckAnswer ] = useState(false)
   //const [ data , setData ] = useState({}) 
   useEffect(()=>{
     console.log("test");
@@ -37,66 +42,134 @@ function Game() {
     })
     
   }
-  async function getAnser(answer){
+  async function getAnswer(answer,index){
     await axios({
       method: 'post',
-      url: 'http://192.168.2.4:3333/game/getHint',
+      url: 'http://192.168.2.4:3333/game/getAnswer',
       data: {
-        answer
+        answer,index
       }
     }).then((response) => {
-      console.log(response.data);
+      setIsAnswerCorrect(response.data)
+      //console.log(response.data);
     }).catch((err)=>{
       console.log(err);
     })
-    
   }
-
-  async function getQ(){
-    return 
-  }
-
-  async function desplayHint(){
-    
-  }
-
-
 
   return (
-    
     <>
       <Q>
         <span>{data[counter]?.q}</span>
       </Q>
-      <Ans onClick={()=>{
-        setAnswer("a");
-      }}>
-        {data[counter]?.a}
-      </Ans>
-      <Ans onClick={()=>{
-        setAnswer("b");
-      }}>
-        {data[counter]?.b}
-      </Ans>
-      <Ans onClick={()=>{
-        setAnswer("c");
-      }}>
-        {data[counter]?.c}
-      </Ans>
-      <Ans onClick={()=>{
-        setAnswer("d");
-      }}>
-        {data[counter]?.d}
-      </Ans>
-      <GiveHint onClick={()=>{
-        getHint(counter)
-      }}>
-        <span>Give me Hint</span>
-       
-      </GiveHint>
-      <Hint>{hint}</Hint>
-      
-      
+      {(() => {
+        if (counter<data.length){
+          
+        }
+
+      })()}
+      {(() => {
+        if (!checkAnsher&&counter<data.length) {
+          return (
+            <>
+              <Ans onClick={()=>{
+                setAnswer("a");
+                setIsAnswerPressed(true);
+                //console.log(isAnswerPressed);
+                //console.log(answer);
+              }}>
+                {data[counter]?.a}
+              </Ans>
+              <Ans onClick={()=>{
+                setAnswer("b");
+                setIsAnswerPressed(true);
+                //console.log(isAnswerPressed);
+                //console.log(answer);
+              }}>
+                {data[counter]?.b}
+              </Ans>
+              <Ans onClick={()=>{
+                setAnswer("c");
+                setIsAnswerPressed(true);
+                //console.log(isAnswerPressed);
+                //console.log(answer);
+              }}>
+                {data[counter]?.c}
+              </Ans>
+              <Ans onClick={()=>{
+                setAnswer("d");
+                setIsAnswerPressed(true);
+                //console.log(isAnswerPressed);
+                //console.log(answer);
+              }}>
+                {data[counter]?.d}
+              </Ans>
+              <GiveHint onClick={()=>{
+                getHint(counter)
+              }}>
+                <span>Give me Hint</span>
+              </GiveHint>
+              <Hint>{hint}</Hint>
+            </>
+          );
+        } else {
+          return null;
+        }
+      })()}
+      {(() => {
+        if (isAnswerPressed&&counter<data.length) {
+          return (
+            <Confirm onClick={()=>{
+              getAnswer(answer,counter)
+              //console.log("Answer",answer,"index",counter,"answer recieved",getAnswer(answer,counter));
+              setIsAnswerPressed(false);
+              setCheckAnswer(true);
+              setHint("");
+              getAnswer(answer,counter);
+              //console.log(counter);
+              //console.log(answer,data.length);
+            }}>
+              CONFIRM
+            </Confirm>
+          );
+        } else {
+          return null;
+        }
+      })()}
+      {(() => {
+        if (checkAnsher&&counter<data.length) {
+          return (
+            <div>
+              <Confirm onClick={()=>{
+                setCheckAnswer(false);
+                setCounter(counter+1);
+                if (isAnswerCorrect){
+                  setScore(score + 1);
+                }
+              }}>
+                Next Answer
+              </Confirm>
+              <DisAns>
+                Your Answer is {isAnswerCorrect ? ("correct") : ("false")}
+              </DisAns>
+            </div>
+          );
+        } else if(counter>=data.length) {
+          return (
+            <>
+              <Hih3>
+                Your Score is {score}
+              </Hih3>
+              <NavLinks to="/">
+                <Hih3>
+                  Press to go BACK
+                </Hih3>
+              </NavLinks>
+            </>
+          );
+        }
+      })()}
+    
     </>
   );
 }
