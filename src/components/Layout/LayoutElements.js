@@ -7,6 +7,7 @@ export const Main = styled.section`
 
 export const BgImg = styled.img`
   z-index:-999;
+  height: 100vh;
   position:absolute;
   width: 100%;
   height: 100%;

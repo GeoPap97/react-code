@@ -60,19 +60,32 @@ export const DisAns = styled.h3`
 `;
 
 export const NavLinks = styled(Link)`
-  background-color: grey;
-  position:relative;
-  left:50%;
-  transform: translate(-50%);
-  display: flex;
-  text-decoration: none;
-  cursor: pointer;
-  border: 0.2rem solid #fff;
+background-color: grey;
+
+position:relative;
+top:60%;
+left:50%;
+transform: translate(-50%);
+display: flex;
+text-decoration: none;
+width: 12%;
+cursor: pointer;
+border: 0.2rem solid #fff;
 `;
 
-export const Hih3 = styled.h3`
+export const goBack = styled.h3`
+  top:50%;
   color:white;
   position:absolute;
+  transform: translate(-50%);
+  font-size: 1.5rem;
+`;
+
+export const Score = styled.h3`
+  align-text:center;
+  color:white;
+  position:absolute;
+  top:20%;
   left:50%;
   transform: translate(-50%);
   font-size: 1.5rem;

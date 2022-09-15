@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, {useState , useEffect} from 'react';
-import { Q, Ans, GiveHint, Hint, Confirm, DisAns, NavLinks, Hih3} from './GameElements';
+import { Q, Ans, GiveHint, Hint, Confirm, DisAns, NavLinks, goBack, Score} from './GameElements';
 
 
 function Game() {
@@ -59,18 +59,19 @@ function Game() {
 
   return (
     <>
-      <Q>
-        <span>{data[counter]?.q}</span>
-      </Q>
-      {(() => {
+      {data[counter] !== undefined &&
+        <Q>
+          <span>{data[counter]?.q}</span>
+        </Q>
+      }
+      {/* {(() => {
         if (counter<data.length){
           
         }
 
-      })()}
-      {(() => {
-        if (!checkAnsher&&counter<data.length) {
-          return (
+      })()} */}
+      
+      { !checkAnsher && counter<data.length &&
             <>
               <Ans onClick={()=>{
                 setAnswer("a");
@@ -111,14 +112,8 @@ function Game() {
               </GiveHint>
               <Hint>{hint}</Hint>
             </>
-          );
-        } else {
-          return null;
-        }
-      })()}
-      {(() => {
-        if (isAnswerPressed&&counter<data.length) {
-          return (
+        } 
+      {isAnswerPressed && counter<data.length &&
             <Confirm onClick={()=>{
               getAnswer(answer,counter)
               //console.log("Answer",answer,"index",counter,"answer recieved",getAnswer(answer,counter));
@@ -131,14 +126,8 @@ function Game() {
             }}>
               CONFIRM
             </Confirm>
-          );
-        } else {
-          return null;
-        }
-      })()}
-      {(() => {
-        if (checkAnsher&&counter<data.length) {
-          return (
+       }
+        {checkAnsher && counter<data.length ?
             <div>
               <Confirm onClick={()=>{
                 setCheckAnswer(false);
@@ -150,25 +139,22 @@ function Game() {
                 Next Answer
               </Confirm>
               <DisAns>
-                Your Answer is {isAnswerCorrect ? ("correct") : ("false")}
-              </DisAns>
-            </div>
-          );
-        } else if(counter>=data.length) {
-          return (
+                Your Answer is {isAnswerCorrect ? ("correct") : ("wrong")} {/*  Edw htan to pio sosto ...  ( condition ? true :(else) false)        */}
+              </DisAns>                                                    
+                                                                            {/* allios condition && <> emfanizeis kati </>  (xwris else)                  */}
+            </div>:
+        (counter>=data.length) && 
             <>
-              <Hih3>
-                Your Score is {score}
-              </Hih3>
+              <Score>
+                Your Score is {score} / {counter}
+              </Score>
               <NavLinks to="/">
-                <Hih3>
+                <goBack>
                   Press to go BACK
-                </Hih3>
+                </goBack>
               </NavLinks>
             </>
-          );
         }
-      })()}
     
     </>
   );
