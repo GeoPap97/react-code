@@ -1,21 +1,17 @@
-import './App.css';
-import Menu from './components/Menu';
-import { Component } from 'react';
-import ButtonStart from './components/ButtonStart';
-import Questions from './components/Questions';
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Game from "./components/pages/game";
+import Home from "./components/pages/home";
 
-class App extends Component{
-  render() {
-    return (
-      <div className="App" /*style={{backgroundColor: 'purple'}}*/>
-        <Questions/>
-        {/* <img src="/Images/GameLogo.png" alt="horse" />
-        <Menu ></Menu>
-        <ButtonStart aligned top></ButtonStart> */}
-      </div>
-    );
-  };
-  
+function App() {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/game" element={<Game />} />
+      </Routes>
+    </Layout>
+  );
 }
 
 export default App;
