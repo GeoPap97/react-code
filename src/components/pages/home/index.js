@@ -1,16 +1,13 @@
-import { BgImg, NavLinks, Hih3, ImgDiv } from "./HomeElements";
-
+import { LogoImg, NavLinks, TextH3} from "./HomeElements";
 
 function Home() {
   return (
     <>
-      <ImgDiv>
-        <BgImg />
-      </ImgDiv>
+      <LogoImg />
       <NavLinks to="/instructions">
-        <Hih3>
-          Press to Start
-        </Hih3>
+        <TextH3>
+          Press for the Instructions {/*Navigate to Insructions */}
+        </TextH3>
       </NavLinks>
     </>
   );

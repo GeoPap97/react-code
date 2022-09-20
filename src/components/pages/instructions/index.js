@@ -1,25 +1,25 @@
-import { BgImg, NavLinks, Hih3, ImgDiv } from "./InstructionsElements";
+import {NavLinks, TextDiv} from "./InstructionsElements";
 
-
+//here i desplay the instructions on the screen
 function Instructions() {
   return (
     <>
-        <Hih3>
-            Peak an answer and then press Confirm
-        </Hih3>
-        <Hih3>
-            If you are not sure you can use a hint by just clicking the hint button
-        </Hih3>
-        <Hih3>
-            You can use as many hints as you wish
-        </Hih3>
-        <Hih3>
-            At the end of the game you will see your score
-        </Hih3>
+      <TextDiv>
+          1-Peak an answer and then press Confirm
+      </TextDiv>
+      <TextDiv>
+          2-If you are not sure you can use a hint by just clicking the hint button
+      </TextDiv>
+      <TextDiv>
+          3-You can use as many hints as you wish
+      </TextDiv>
+      <TextDiv>
+          4-At the end of the game you will see your score
+      </TextDiv>
       <NavLinks to="/game">
-        <Hih3>
+        <TextDiv>
           Press to Start
-        </Hih3>
+        </TextDiv>
       </NavLinks>
     </>
   );

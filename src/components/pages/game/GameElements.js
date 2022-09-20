@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Link} from "react-router-dom";
 
-export const Q = styled.h3`
+//The element to display the question
+export const TextQ = styled.h3`
   color:white;
   position:relative;
   left:50%;
@@ -10,6 +11,7 @@ export const Q = styled.h3`
   cursor: pointer;
 `;
 
+//The button for the answers
 export const Ans = styled.button`
   color:black;
   position:relative;
@@ -21,10 +23,12 @@ export const Ans = styled.button`
   border: 0.2rem solid #fff;
 `;
 
+//The colored button for the answers. Wich inherits the prevews properties
 export const PressedAns = styled(Ans)`
   border-color: green;
 `;
 
+//The button to ask for a hint
 export const GiveHint = styled.button`
   position:relative;
   left:25%;
@@ -35,6 +39,7 @@ export const GiveHint = styled.button`
   border: 0.2rem solid #fff;
 `;
 
+//The Button to confirm your answer
 export const Confirm = styled.button`
   position:relative;
   left:75%;
@@ -45,7 +50,8 @@ export const Confirm = styled.button`
   border: 0.2rem solid #fff;
 `;
 
-export const Hint = styled.h3`
+//The text to display the hint
+export const TextHint = styled.h3`
   color:white;
   position:relative;
   left:50%;
@@ -54,7 +60,8 @@ export const Hint = styled.h3`
   cursor: pointer;
 `;
 
-export const DisAns = styled.div`
+//The text to display if the answer is correct
+export const TextDisAns = styled.div`
   color:white;
   position:absolute;
   left:50%;
@@ -63,9 +70,9 @@ export const DisAns = styled.div`
   cursor: pointer;
 `;
 
+//This is an element to navigate through the links
 export const NavLinks = styled(Link)`
 background-color: grey;
-
 position:relative;
 top:60%;
 left:50%;
@@ -77,6 +84,7 @@ cursor: pointer;
 border: 0.2rem solid #fff;
 `;
 
+//the text to display that the game is finished
 export const goBack = styled.h3`
   top:50%;
   color:white;
@@ -85,6 +93,7 @@ export const goBack = styled.h3`
   font-size: 1.5rem;
 `;
 
+//the text to display the score
 export const Score = styled.h3`
   align-text:center;
   color:white;
