@@ -1,9 +1,10 @@
 import { LogoImg, NavLinks, TextH3} from "./HomeElements";
 
+//this is the function for the home page
 function Home() {
   return (
     <>
-      <LogoImg />
+      <LogoImg /> {/*Here is the logo image*/}
       <NavLinks to="/instructions">
         <TextH3>
           Press for the Instructions {/*Navigate to Insructions */}

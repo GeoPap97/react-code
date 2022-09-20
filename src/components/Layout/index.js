@@ -1,11 +1,12 @@
 import { Main, BgImg } from "./LayoutElements";
 
+//This is the function for the layoute
 function Layout(props) {
   return (
     <div>
-      <BgImg/>
+      <BgImg/> {/*Here is the background image*/}
       <Main>
-        {props.children}
+        {props.children} {/*Here is all the content*/}
       </Main>
     </div>
   );
