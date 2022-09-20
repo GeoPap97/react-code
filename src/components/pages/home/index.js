@@ -7,7 +7,7 @@ function Home() {
       <ImgDiv>
         <BgImg />
       </ImgDiv>
-      <NavLinks to="/game">
+      <NavLinks to="/instructions">
         <Hih3>
           Press to Start
         </Hih3>

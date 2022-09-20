@@ -21,6 +21,10 @@ export const Ans = styled.button`
   border: 0.2rem solid #fff;
 `;
 
+export const PressedAns = styled(Ans)`
+  border-color: green;
+`;
+
 export const GiveHint = styled.button`
   position:relative;
   left:25%;
@@ -50,7 +54,7 @@ export const Hint = styled.h3`
   cursor: pointer;
 `;
 
-export const DisAns = styled.h3`
+export const DisAns = styled.div`
   color:white;
   position:absolute;
   left:50%;

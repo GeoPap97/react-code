@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, {useState , useEffect} from 'react';
-import { Q, Ans, GiveHint, Hint, Confirm, DisAns, NavLinks, goBack, Score} from './GameElements';
+import { Q, Ans, GiveHint, Hint, Confirm, DisAns, NavLinks, PressedAns, Score} from './GameElements';
 
 
 function Game() {
@@ -11,15 +11,14 @@ function Game() {
   const [ answer , setAnswer ] = useState("")
   const [ isAnswerPressed , setIsAnswerPressed ] = useState(false)
   const [ isAnswerCorrect , setIsAnswerCorrect ] = useState(false)
-  const [ checkAnsher , setCheckAnswer ] = useState(false)
-  //const [ data , setData ] = useState({}) 
+  const [ checkAnswer , setCheckAnswer ] = useState(false)
   useEffect(()=>{
-    console.log("test");
+    //console.log("test");
    getData();
   },[])
 
   async function getData(){
-    await axios("http://192.168.2.4:3333/game/getQuestions").then((response) => {
+    await axios("http://localhost:3333/game/getQuestions").then((response) => {
       //console.log(response.data);
       setData(response.data)
     }).catch((err)=>{
@@ -30,7 +29,7 @@ function Game() {
   async function getHint(hint){
     await axios({
       method: 'post',
-      url: 'http://192.168.2.4:3333/game/getHint',
+      url: 'http://localhost:3333/game/getHint',
       data: {
         hint
       }
@@ -45,7 +44,7 @@ function Game() {
   async function getAnswer(answer,index){
     await axios({
       method: 'post',
-      url: 'http://192.168.2.4:3333/game/getAnswer',
+      url: 'http://localhost:3333/game/getAnswer',
       data: {
         answer,index
       }
@@ -55,6 +54,28 @@ function Game() {
     }).catch((err)=>{
       console.log(err);
     })
+  }
+  function renderAnswer(ans,text){
+    return(
+      answer == ans ?
+        <PressedAns onClick={()=>{
+          setAnswer("");
+          setIsAnswerPressed(false);
+          //console.log(isAnswerPressed);
+          //console.log(answer);
+        }}>
+          {text}
+        </PressedAns>
+        :
+        <Ans onClick={()=>{
+          setAnswer(ans);
+          setIsAnswerPressed(true);
+          //console.log(isAnswerPressed);
+          //console.log(answer);
+        }}>
+          {text}
+        </Ans>
+    )
   }
 
   return (
@@ -71,40 +92,13 @@ function Game() {
 
       })()} */}
       
-      { !checkAnsher && counter<data.length &&
+      { !checkAnswer && counter<data.length &&
             <>
-              <Ans onClick={()=>{
-                setAnswer("a");
-                setIsAnswerPressed(true);
-                //console.log(isAnswerPressed);
-                //console.log(answer);
-              }}>
-                {data[counter]?.a}
-              </Ans>
-              <Ans onClick={()=>{
-                setAnswer("b");
-                setIsAnswerPressed(true);
-                //console.log(isAnswerPressed);
-                //console.log(answer);
-              }}>
-                {data[counter]?.b}
-              </Ans>
-              <Ans onClick={()=>{
-                setAnswer("c");
-                setIsAnswerPressed(true);
-                //console.log(isAnswerPressed);
-                //console.log(answer);
-              }}>
-                {data[counter]?.c}
-              </Ans>
-              <Ans onClick={()=>{
-                setAnswer("d");
-                setIsAnswerPressed(true);
-                //console.log(isAnswerPressed);
-                //console.log(answer);
-              }}>
-                {data[counter]?.d}
-              </Ans>
+              {renderAnswer('a', data[counter]?.a)}
+              {renderAnswer('b', data[counter]?.b)}
+              {renderAnswer('c', data[counter]?.c)}
+              {renderAnswer('d', data[counter]?.d)}
+              
               <GiveHint onClick={()=>{
                 getHint(counter)
               }}>
@@ -127,7 +121,7 @@ function Game() {
               CONFIRM
             </Confirm>
        }
-        {checkAnsher && counter<data.length ?
+        {checkAnswer && counter<data.length ?
             <div>
               <Confirm onClick={()=>{
                 setCheckAnswer(false);
