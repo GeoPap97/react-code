@@ -3,12 +3,14 @@ import Layout from "./components/Layout";
 import Game from "./components/pages/game";
 import Home from "./components/pages/home";
 
+console.log("papi rulez")
 function App() {
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<Game />} />
+          
       </Routes>
     </Layout>
   );
